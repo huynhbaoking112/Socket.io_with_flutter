@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:tik_tac_toe_online/resources/socket_methods.dart';
 import 'package:tik_tac_toe_online/responesive/responsive.dart';
 import 'package:tik_tac_toe_online/widgets/custom_text.dart';
 import 'package:tik_tac_toe_online/widgets/custom_textfield.dart';
@@ -17,6 +18,16 @@ class CreateRoomScreen extends StatefulWidget {
 
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController controller = TextEditingController();
+  final SocketMethods _socketMethods = SocketMethods();
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _socketMethods.createRoomSuccessListener(context);
+  }
 
   @override
   void dispose() {
@@ -32,36 +43,40 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     return SafeArea(
       child: Scaffold(
         body: ResponesiveScreen(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            // ignore: prefer_const_constructors
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //Chữ sáng
-                const CustomText(
-                    text: 'Create Room',
-                    shadows: [Shadow(blurRadius: 40, color: Colors.blue)],
-                    fontsize: 70),
-
-                SizedBox(
-                  height: size.height * 0.08,
-                ),
-
-                //Điền tên user name
-                CustomTextField(
-                  controller: controller,
-                  hintText: "Enter your name",
-                ),
-
-                SizedBox(
-                  height: size.height * 0.08,
-                ),
-
-                //Button Create
-                CustomButton(onTap: () {}, text: 'Create'),
-              ],
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              // ignore: prefer_const_constructors
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //Chữ sáng
+                  const CustomText(
+                      text: 'Create Room',
+                      shadows: [Shadow(blurRadius: 40, color: Colors.blue)],
+                      fontsize: 70),
+             
+                  SizedBox(
+                    height: size.height * 0.08,
+                  ),
+            
+                  //Điền tên user name
+                  CustomTextField(
+                    controller: controller,
+                    hintText: "Enter your name",
+                  ),
+            
+                  SizedBox(
+                    height: size.height * 0.08,
+                  ),
+            
+                  //Button Create
+                  CustomButton(onTap: () {
+                    _socketMethods.createRoom(controller.text);
+                  }, text: 'Create'),
+                ],
+              ),
             ),
           ),
         ),

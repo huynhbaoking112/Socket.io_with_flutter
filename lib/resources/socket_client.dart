@@ -8,7 +8,13 @@ class SocketClient {
   static SocketClient? _instance;
 
   SocketClient._internal(){
-    socket = IO.io('http://localhost:3000');
+    socket = IO.io('http://192.168.1.23:8000',
+    IO.OptionBuilder()
+    .setTransports(['websocket'])
+    .disableAutoConnect()
+    // .setExtraHeaders({'foo': 'bar'})
+    .build()
+    );
     socket!.connect();  
   }
 
@@ -21,3 +27,4 @@ class SocketClient {
 
 }
 
+// 192.168.1.23:8000
