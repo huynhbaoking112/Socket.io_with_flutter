@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tik_tac_toe_online/provider/room_data_provider.dart';
 import 'package:tik_tac_toe_online/resources/socket_methods.dart';
 import 'package:tik_tac_toe_online/views/scoreboard.dart';
+import 'package:tik_tac_toe_online/views/tiktactoe_board.dart';
 import 'package:tik_tac_toe_online/views/waiting_lobby.dart';
 
 class GameScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _GameScreenState extends State<GameScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Scoreboard(),
+              TicTacToeBoard()
             ],
           )),
     );
