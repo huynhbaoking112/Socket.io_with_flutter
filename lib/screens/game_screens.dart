@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tik_tac_toe_online/provider/room_data_provider.dart';
 
 class GameScreen extends StatefulWidget {
   static String routeName = '/game';
@@ -11,6 +13,14 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+
+    Provider.of<RoomDataProvider>(context, listen: false).roomData.toString();
+
+    return Scaffold(
+      body: Center(
+        child: Text( Provider.of<RoomDataProvider>(context, listen: false).roomData.toString()
+),
+      ),
+    );
   }
 }

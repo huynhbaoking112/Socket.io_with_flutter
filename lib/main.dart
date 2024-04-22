@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tik_tac_toe_online/provider/room_data_provider.dart';
 import 'package:tik_tac_toe_online/screens/create_room_screen.dart';
 import 'package:tik_tac_toe_online/screens/game_screens.dart';
 import 'package:tik_tac_toe_online/screens/join_room_screen.dart';
@@ -14,18 +16,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor
+    return ChangeNotifierProvider(
+      create: (context) => RoomDataProvider(),
+      child: MaterialApp(
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: bgColor
+        ),
+        debugShowCheckedModeBanner: false,
+        routes: {
+          MainMenuScreen.route : (context) => MainMenuScreen(),
+          JoinRoomScreen.routeName :(context) =>  JoinRoomScreen(),
+          CreateRoomScreen.routeName :(context) => CreateRoomScreen(),
+          GameScreen.routeName: (context) => GameScreen(),
+        },
+        initialRoute: MainMenuScreen.route,
       ),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        MainMenuScreen.route : (context) => MainMenuScreen(),
-        JoinRoomScreen.routeName :(context) =>  JoinRoomScreen(),
-        CreateRoomScreen.routeName :(context) => CreateRoomScreen(),
-        GameScreen.routeName: (context) => GameScreen(),
-      },
-      initialRoute: MainMenuScreen.route,
     );
   }
 }
