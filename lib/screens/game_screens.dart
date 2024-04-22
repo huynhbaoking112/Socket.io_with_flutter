@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tik_tac_toe_online/provider/room_data_provider.dart';
+import 'package:tik_tac_toe_online/resources/socket_methods.dart';
+import 'package:tik_tac_toe_online/views/waiting_lobby.dart';
 
 class GameScreen extends StatefulWidget {
   static String routeName = '/game';
-  const GameScreen({super.key});
-  
-
+  const GameScreen({super.key});  
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
+
+  SocketMethods _socketClient = SocketMethods();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  _socketClient.updateRoomListener(context);
+  _socketClient.updatePlayersListener(context);
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
-    // print(Provider.of<RoomDataProvider>(context).player1.nickname);
-    // print(Provider.of<RoomDataProvider>(context).player2.nickname);
+    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
 
     return Scaffold(
-      body: Center(
-        child: Text( Provider.of<RoomDataProvider>(context, listen: false).roomData.toString()
-),
+      body: roomDataProvider.roomData['isJoin'] ? WaitingLobby() : Center(
+         
       ),
     );
   }

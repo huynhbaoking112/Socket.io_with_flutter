@@ -80,6 +80,7 @@ io.on("connection", (socket) => {
 
         io.to(roomId).emit("joinRoomSuccess", room)
         io.to(roomId).emit("updatePlayers", room)
+        io.to(roomId).emit("updateRoom", room)
 
     } catch (error) {
       console.log(error);

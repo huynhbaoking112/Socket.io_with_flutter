@@ -9,10 +9,13 @@ class CustomTextField extends StatelessWidget {
 
   final String hintText;
 
+  final bool isReadOnly; 
+
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
+     this.isReadOnly = false,
   }) : super(key: key);
 
   @override
@@ -25,6 +28,7 @@ class CustomTextField extends StatelessWidget {
         ]
       ),
       child: TextField(
+        readOnly: isReadOnly,
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
