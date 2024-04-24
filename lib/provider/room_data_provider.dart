@@ -9,10 +9,27 @@ class RoomDataProvider extends ChangeNotifier {
   Player _player2 =
       Player(nickname: '', socketID: 'socketID', points: 0, playerType: 'O');
 
+  List<String> _gameProcess = List.filled(9, "");
+  int _choosePlay = 0;
+
+
+
   //Getter
+
+  List<String> get gameProceess => _gameProcess;
+
   Map<String, dynamic> get roomData => _roomData;
   Player get player1 => _player1;
   Player get player2 => _player2;
+  int   get choosePlay => _choosePlay; 
+
+
+  //Setter
+  void updateGameProcess(int index, String symbol){
+    _choosePlay ++;
+    _gameProcess[index] = symbol;
+     notifyListeners();
+  }
 
   void updateRoomData(Map<String, dynamic> data) {
     _roomData = data;

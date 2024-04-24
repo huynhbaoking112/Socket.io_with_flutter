@@ -86,6 +86,30 @@ io.on("connection", (socket) => {
       console.log(error);
     }
   });
+
+  //SelectBlank
+  socket.on('selectBlank',async ({index, roomID}) => {
+   try {
+    var room = await roomModel.findById(roomID);
+    var currentTurn = room.turn
+
+    var indexs = room.turnIndex
+    room.turnIndex = indexs == 0 ? 1 : 0
+    room.turn = indexs == 0? room.player[1] : room.player[0] 
+
+    await room.save();
+
+    io.to(roomID).emit('tickBlank', ({'room': room, 'symbol': currentTurn.playerType, index}));
+
+   } catch (error) {
+    console.log(error);    
+   }
+
+
+
+  })
+
+
 });
 
 //connect mongoose

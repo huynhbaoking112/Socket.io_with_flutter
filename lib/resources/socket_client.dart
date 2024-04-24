@@ -8,7 +8,7 @@ class SocketClient {
   static SocketClient? _instance;
 
   SocketClient._internal(){
-    socket = IO.io('http://192.168.1.23:8000',
+    socket = IO.io('http://192.168.1.7:8000',
     IO.OptionBuilder()
     .setTransports(['websocket'])
     .disableAutoConnect()
@@ -28,3 +28,6 @@ class SocketClient {
 }
 
 // 192.168.1.23:8000
+// 0 1 2
+// 3 4 5
+// 6 7 8
